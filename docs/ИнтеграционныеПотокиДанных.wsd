@@ -1,0 +1,68 @@
+@startuml ИнтеграционныеПотокиДанных
+
+' left to right direction
+' allowmixing
+skinparam ranksep 10
+skinparam dpi 80
+skinparam packageTitleAlignment left
+
+skinparam sequence {
+   ArrowColor Red
+}
+
+skinparam usecase {
+    BackgroundColor LightPink
+}
+
+skinparam note {
+    BackgroundColor LightBlue
+}
+
+skinparam rectangle {
+    BackgroundColor LightGray
+}
+
+!include <tupadr3/common>
+!include <tupadr3/font-awesome/server>
+!include <tupadr3/font-awesome/database>
+!include <tupadr3/font-awesome/file_excel_o>
+!include <tupadr3/font-awesome/mobile>
+!include <tupadr3/font-awesome/safari>
+!include <tupadr3/font-awesome/wpforms>
+
+Title **Интеграционные потоки данных** 
+Caption Схема потоков данных после внедрения
+' Доступные команды:
+' функция | функция с пояснением
+' подпроцесс
+' событие
+' пояснение
+' условие
+' стрелка вниз
+' стрелка вверх
+' стрелка вправо
+' стрелка влево
+' терминатор
+' 
+
+FA_DATABASE(ерпух, "1С:ЕРП УХ АПК") #Yellow
+
+FA_DATABASE(зуп, "1С:ЗУП КОРП") #Yellow
+
+FA_SERVER(аврора, Аврора)
+FA_SERVER(азс, Данные по\nтопливным картам)
+
+FA_FILE_EXCEL_O(кб, Клиент банка)
+
+зуп -l-> ерпух : расчитанная зарплата,\nсотрудники
+ерпух -r-> зуп : сдельная зарплата
+
+аврора -d-> ерпух : наряд-заказы \n(за рамками проекта)
+
+азс -r-> ерпух
+ерпух <-d-> кб
+
+
+
+
+@enduml
