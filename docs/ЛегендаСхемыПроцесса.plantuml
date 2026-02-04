@@ -1,0 +1,200 @@
+@startuml ЛегендаCхемыПроцессаЧасть1
+
+skinparam ranksep 10
+skinparam dpi 120
+skinparam packageTitleAlignment left
+
+
+skinparam sequence {
+ArrowColor Red
+}
+
+skinparam usecase {
+    BackgroundColor LightPink
+}
+
+skinparam note {
+    BackgroundColor LightBlue
+}
+
+skinparam rectangle {
+    BackgroundColor LightGray
+}
+
+' Описание схемы
+Title **Нотация для описания процесса**
+caption Представление основных элементов
+
+' Объекты схемы
+
+usecase Т.1 as "**1**"
+
+
+usecase/ С.1 as "Событие"
+
+usecase Ф.2 #AAFFAA as "
+Ответственный
+====
+Функция
+----
+Идентификатор шага процесса"
+
+Rectangle  {
+    usecase П.3 #AAFFAA as "
+    Подпроцесс
+    ----
+    Х-003" 
+}
+
+' Пояснения
+
+note left of Ф.2
+Результат работы функции:
+бумажный или электронный документ.
+Элемент описывает что
+происходит при выполнении функции
+end note
+
+note left of Т.1
+Терминатор. Процесс продолжится
+на другой странице, с такой же 
+цифры
+end note
+
+note left of С.1
+Внешнее событие. Процесс
+движется дальше, когда
+событие происходит
+end note
+
+
+Ф.2 -d-> С.1
+С.1 -d-> П.3
+П.3 -d-> Т.1
+
+@enduml
+
+@startuml ЛегендаCхемыПроцессаЧасть2
+
+skinparam ranksep 10
+skinparam dpi 120
+skinparam packageTitleAlignment left
+
+skinparam sequence {
+ArrowColor Red
+}
+
+skinparam usecase {
+    BackgroundColor LightPink
+}
+
+skinparam note {
+    BackgroundColor LightBlue
+}
+
+skinparam rectangle {
+    BackgroundColor LightGray
+}
+
+' Описание схемы
+Title **Соглашение о моделировании. Условия**
+caption Условия
+
+' Объекты схемы
+
+Rectangle #FFFFFF {
+    usecase У.1 as (**XOR**)
+    usecase У.2 as (**ИЛИ**)
+    usecase У.3 as (**И**)     
+
+    note left of У.1 
+    Дальнейшее движение возможно
+    только по одному из путей
+    end note
+
+    note left of У.2 
+    Дальнейшее движение возможно
+    по одному или нескольким
+    из доступных путей
+    end note
+
+    note left of У.3 
+    Дальнейшее движение
+    происходит по всем
+    путям
+    end note
+}
+
+@enduml
+
+@startuml ЛегендаCхемыПроцессаЧасть3
+
+skinparam ranksep 10
+skinparam dpi 120
+skinparam packageTitleAlignment left
+
+
+skinparam sequence {
+ArrowColor Red
+}
+
+skinparam usecase {
+    BackgroundColor LightPink
+}
+
+skinparam note {
+    BackgroundColor LightBlue
+}
+
+skinparam rectangle {
+    BackgroundColor LightGray
+}
+
+' Описание схемы
+Title **Соглашение о моделировании. Пример схемы**
+caption Примеры
+
+' Объекты схемы
+
+usecase/ С.1 as "Количество совпадает"
+usecase/ С.2 as "Количество расходится"
+
+usecase Ф.2 #AAFFAA as "
+Кладовщик
+====
+Сверить количество в машине
+с количеством в документах
+----
+П-001"
+
+usecase У.1 as (**XOR**)
+
+
+Rectangle  {
+    usecase П.3 #AAFFAA as "
+    Оформить
+    поступление
+    товара
+    ----
+    Х-003" 
+}
+
+Rectangle {
+usecase П.2 #AAFFAA as "
+Оформить 
+расхождение
+----
+Х-002"
+}
+
+' Пояснения
+
+Ф.2 -d-> У.1
+У.1 -d-> С.1
+
+У.1 -d-> С.2
+
+С.1 -d-> П.3
+С.2 -d-> П.2
+
+@enduml
